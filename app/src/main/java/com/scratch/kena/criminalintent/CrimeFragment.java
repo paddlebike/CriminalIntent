@@ -13,8 +13,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
-import com.scratch.kena.criminalintent.R;
-
 /**
  * Created by kena on 7/31/17.
  * * Taken from Android Programming: the Big Nerd Ranch 3.e
