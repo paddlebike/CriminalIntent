@@ -50,6 +50,13 @@ public class CrimeFragment extends Fragment {
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        CrimeLab.get(getActivity()).updateCrime(mCrime);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -95,6 +102,16 @@ public class CrimeFragment extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 mCrime.setIsSolved(b);
                 getActivity().setResult(2, null); // Inform the caller that we changed the solved status
+            }
+        });
+
+        Button mDeleteButton = v.findViewById(R.id.crime_delete);
+        mDeleteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                CrimeLab.get(getActivity()).deleteCrime(mCrime.getId());
+                // mCrime = null;
+                getActivity().finish();
             }
         });
         return v;
