@@ -25,6 +25,7 @@ public class CrimeListFragment extends Fragment {
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
     private static final String TAG="CrimeListFragment";
+    private static int REQUEST_CRIME = 1;
 
     @Nullable
     @Override
@@ -39,6 +40,15 @@ public class CrimeListFragment extends Fragment {
         updateUI();
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CRIME) {
+            // The result code (if present) tells us what got changed.
+            Log.d(TAG, String.format("Got a result code: %d", resultCode));
+        }
     }
 
     @Override
@@ -81,8 +91,9 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
-            startActivity(intent);
+            //Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
+            Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
+            startActivityForResult(intent, REQUEST_CRIME);
         }
 
 

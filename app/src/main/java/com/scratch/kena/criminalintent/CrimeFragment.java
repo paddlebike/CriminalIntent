@@ -1,5 +1,6 @@
 package com.scratch.kena.criminalintent;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -61,6 +62,7 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 mCrime.setTitle(charSequence.toString());
+                getActivity().setResult(3, null); // Inform the caller that we updated the text
             }
 
             @Override
@@ -79,8 +81,12 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 mCrime.setIsSolved(b);
+                getActivity().setResult(2, null); // Inform the caller that we changed the solved status
             }
         });
         return v;
     }
+
+
+
 }
