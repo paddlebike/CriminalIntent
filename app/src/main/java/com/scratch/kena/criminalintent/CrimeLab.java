@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.scratch.kena.criminalintent.database.CrimeBaseHelper;
 import com.scratch.kena.criminalintent.database.CrimeCursorWrapper;
-import com.scratch.kena.criminalintent.database.CrimeDbSchema;
 import com.scratch.kena.criminalintent.database.CrimeDbSchema.CrimeTable;
 
 import java.util.ArrayList;
@@ -98,10 +97,11 @@ public class CrimeLab {
 
     private static ContentValues getContentValues(Crime crime) {
         ContentValues values = new ContentValues();
-        values.put(CrimeTable.Cols.UUID,   crime.getId().toString());
-        values.put(CrimeTable.Cols.TITLE,  crime.getTitle());
-        values.put(CrimeTable.Cols.DATE,   crime.getDate().getTime());
-        values.put(CrimeTable.Cols.SOLVED, crime.getIsSolved() ? 1 : 0);
+        values.put(CrimeTable.Cols.UUID,    crime.getId().toString());
+        values.put(CrimeTable.Cols.TITLE,   crime.getTitle());
+        values.put(CrimeTable.Cols.DATE,    crime.getDate().getTime());
+        values.put(CrimeTable.Cols.SOLVED,  crime.getIsSolved() ? 1 : 0);
+        values.put(CrimeTable.Cols.SUSPECT, crime.getSuspect());
         return values;
     }
 
