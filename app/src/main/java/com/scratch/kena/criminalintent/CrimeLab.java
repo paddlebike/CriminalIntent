@@ -9,6 +9,7 @@ import com.scratch.kena.criminalintent.database.CrimeBaseHelper;
 import com.scratch.kena.criminalintent.database.CrimeCursorWrapper;
 import com.scratch.kena.criminalintent.database.CrimeDbSchema.CrimeTable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -44,12 +45,14 @@ public class CrimeLab {
     }
 
     public void updateCrime(Crime crime) {
-        String uuidString = crime.getId().toString();
-        ContentValues values = getContentValues(crime);
+        if (crime.getTitle() != null && !crime.getTitle().isEmpty()) {
+            String uuidString = crime.getId().toString();
+            ContentValues values = getContentValues(crime);
 
-        mDatabase.update(CrimeTable.NAME, values,
-                CrimeTable.Cols.UUID + " = ?",
-                new String[] { uuidString});
+            mDatabase.update(CrimeTable.NAME, values,
+                    CrimeTable.Cols.UUID + " = ?",
+                    new String[]{uuidString});
+        }
     }
 
     public List<Crime> getCrimes() {
@@ -84,6 +87,11 @@ public class CrimeLab {
         } finally {
             cursor.close();
         }
+    }
+
+    public File getPhotoFile(Crime crime) {
+        File filesDir = mContext.getFilesDir();
+        return new File(filesDir, crime.getPhotoFilename());
     }
 
     public void deleteCrime(UUID id) {
