@@ -10,7 +10,7 @@ import java.util.UUID;
  */
 
 public class CrimeListActivity extends SingleFragmentActivity
-    implements CrimeListFragment.Callbacks {
+    implements CrimeListFragment.Callbacks, CrimeFragment.Callbacks {
 
     @Override
     protected Fragment createFragment() {
@@ -36,6 +36,12 @@ public class CrimeListActivity extends SingleFragmentActivity
         }
     }
 
+    @Override
+    public void onCrimeUpdated(Crime crime) {
+        CrimeListFragment listFragment = (CrimeListFragment)
+                getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        listFragment.updateUI();
+    }
 }
 
 

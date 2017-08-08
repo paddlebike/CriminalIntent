@@ -19,7 +19,7 @@ import java.util.UUID;
  * Taken from Android Programming: the Big Nerd Ranch 3.e
  */
 
-public class CrimePagerActivity extends AppCompatActivity {
+public class CrimePagerActivity extends AppCompatActivity implements CrimeFragment.Callbacks{
     private ViewPager mViewPager;
     private List<Crime> mCrimes;
     private static final String EXTRA_CRIME_ID = "com.scratch.kena.criminalintent.crime_id";
@@ -62,5 +62,10 @@ public class CrimePagerActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    @Override
+    public void onCrimeUpdated(Crime crime) {
+
     }
 }
